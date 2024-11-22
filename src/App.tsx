@@ -47,10 +47,10 @@ function App() {
   };
   const watermark = async () => {
     const videoURL =
-      "http://tig-media.s3.amazonaws.com/ephs_mbb/matchup/backgrounds/slash_blue_bg.mp4";
+      "https://tig-media.s3.amazonaws.com/ephs_mbb/matchup/backgrounds/slash_blue_bg.mp4";
     const ffmpeg = ffmpegRef.current;
     await ffmpeg.writeFile("input.mp4", await fetchFile(videoURL));
-    await ffmpeg.writeFile('block.ttf', await fetchFile('http://tig-media.s3.amazonaws.com/ephs_mbb/css/fonts/Block.ttf'));
+    await ffmpeg.writeFile('block.ttf', await fetchFile('https://tig-media.s3.amazonaws.com/ephs_mbb/css/fonts/Block.ttf'));
     await ffmpeg.exec([
       "-i",
       "input.mp4",
