@@ -12,7 +12,7 @@ function App() {
   const load = async () => {
     try {
       setLoading(true);
-      const baseURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm";  
+      const baseURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.6/dist/esm";
       const ffmpeg = ffmpegRef.current;
       ffmpeg.on("log", ({ message }) => {
         if (messageRef.current) messageRef.current.innerHTML = message;
@@ -46,19 +46,16 @@ function App() {
     }
   };
   const watermark = async () => {
-    const imageURL = 
-      "http://tig-media.s3.amazonaws.com/maryland_fb_2018/score_update/opponents/bowling_green.png";
     const videoURL =
-      "http://tig-media.s3.amazonaws.com/ti_motion_demo/brush_1x1/backgrounds/background.mp4";
+      "http://tig-media.s3.amazonaws.com/ephs_mbb/matchup/backgrounds/slash_blue_bg.mp4";
     const ffmpeg = ffmpegRef.current;
     await ffmpeg.writeFile("input.mp4", await fetchFile(videoURL));
-    await ffmpeg.writeFile("image.png", await fetchFile(imageURL));
-    await ffmpeg.writeFile('arial.ttf', await fetchFile('http://tig-media.s3.amazonaws.com/ti_motion_demo/css/fonts/Block.ttf'));
+    await ffmpeg.writeFile('block.ttf', await fetchFile('http://tig-media.s3.amazonaws.com/ephs_mbb/css/fonts/Block.ttf'));
     await ffmpeg.exec([
       "-i",
       "input.mp4",
-      "-filter_complex",
-      "drawtext=fontfile=/arial.ttf:text='Tigers':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=white",
+      "-vf",
+      "drawtext=fontfile=/block.ttf:text='Fuzzy Red Panda':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=white",
       "output.mp4",
     ]);
     const fileData = await ffmpeg.readFile("output.mp4");
@@ -71,12 +68,17 @@ function App() {
   };
 
   return (
-    <div>
+    <div
+      style={{
+        margin: "auto",
+        padding: "20px",
+      }}
+    >
       {loaded ? (
         <>
           <video
             style={{
-              height: "300px",
+              height: "200px",
             }}
             ref={videoRef}
             controls
