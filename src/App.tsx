@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL, fetchFile } from "@ffmpeg/util";
+import AddText from './components/AddText';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -74,6 +75,9 @@ function App() {
         padding: "20px",
       }}
     >
+
+<AddText />
+
       {loaded ? (
         <>
           <video
@@ -91,6 +95,7 @@ function App() {
         <>
           {loading && <p>Loading ffmpeg-core...</p>}
           <button onClick={load}>Load ffmpeg-core</button>
+
         </>
       )}
     </div>
