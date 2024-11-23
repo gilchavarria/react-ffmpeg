@@ -54,8 +54,8 @@ function App() {
     await ffmpeg.exec([
       "-i",
       "input.mp4",
-      "-vf",
-      "drawtext=fontfile=/block.ttf:text='Fuzzy Red Panda':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=white",
+      "-filter_complex",
+      "drawtext=fontfile=/block.ttf:text='Fuzzy Red Panda':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=white:enable='between(t,1,6)'",
       "output.mp4",
     ]);
     const fileData = await ffmpeg.readFile("output.mp4");
