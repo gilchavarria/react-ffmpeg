@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL, fetchFile } from "@ffmpeg/util";
-import AddText from './components/AddText';
+import AddText from './components/LiveText';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -76,7 +76,7 @@ function App() {
       }}
     >
 
-<AddText />
+      <AddText/>
 
       {loaded ? (
         <>

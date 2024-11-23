@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function AddText() {
+function LiveText() {
     const [text, setText] = useState('Hello, World!'); // Initial text
 
     const handleChange = (event) => {
@@ -15,4 +15,4 @@ function AddText() {
     );
 }
 
-export default AddText;
+export default LiveText;
