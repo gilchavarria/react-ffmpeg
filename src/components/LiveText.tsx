@@ -1,4 +1,3 @@
-
 type LiveTextProps = {
     name: string
 }

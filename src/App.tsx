@@ -1,7 +1,8 @@
 import { useState, useRef } from "react";
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL, fetchFile } from "@ffmpeg/util";
-import { LiveText } from './components/LiveText'
+import { LiveText } from './components/LiveText';
+import { Person } from './components/Person';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -77,6 +78,7 @@ function App() {
     >
 
       <LiveText name='Gilbert' />
+      <Person name={"Jax"} />{" "}
 
       {loaded ? (
         <>
