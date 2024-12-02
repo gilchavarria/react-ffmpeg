@@ -1,12 +1,29 @@
-import { useState, useRef } from "react";
+import { useState, useRef } from 'react';
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL, fetchFile } from "@ffmpeg/util";
 import { LiveText } from './components/LiveText';
 import { Person } from './components/Person';
+import { ChildComponent } from './components/ChildComponent';
+import { Batman } from './components/Batman';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
+
+/*
+  const [parentState, setParentState] = useState(''); // useState hook used to manage state
+
+  const handleChildStateChange = (newState) => { // function receives updated state from child component
+    setParentState(newState);                     // updates parentState
+  }
+*/
+
+  /* Create a new object called batmanName */
+  const batmanName = {
+    first: 'Bruce', // properties
+    last: 'Wayne',
+  }
+
   const ffmpegRef = useRef(new FFmpeg());
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const messageRef = useRef<HTMLParagraphElement | null>(null);
@@ -79,6 +96,13 @@ function App() {
 
       <LiveText name='Gilbert' />
       <Person name={"Jax"} />{" "}
+
+      {/* name prop is equal to a string */}
+      {/* messageCount prop is equal to a number */}
+      {/* isLoggedIn prop is equal to a boolean */}
+      <ChildComponent name='Vishwas' messageCount={20} isLoggedIn={false} /> 
+
+      <Batman name={batmanName} />
 
       {loaded ? (
         <>
