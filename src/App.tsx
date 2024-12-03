@@ -6,9 +6,6 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  type BigPlayProps = { // type keyword is equal to an object -> PlayProps
-    name: string // key - name and data type - string
-  }
   // Big Play
   const [bigPlay, setBigPlay] = useState<string | null>(null);
 
