@@ -1,27 +1,19 @@
 import { useState, useRef } from 'react';
 import { FFmpeg } from "@ffmpeg/ffmpeg";
 import { toBlobURL, fetchFile } from "@ffmpeg/util";
-import { LiveText } from './components/LiveText';
-import { Person } from './components/Person';
-import { ChildComponent } from './components/ChildComponent';
-import { Batman } from './components/Batman';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
 
-/*
-  const [parentState, setParentState] = useState(''); // useState hook used to manage state
-
-  const handleChildStateChange = (newState) => { // function receives updated state from child component
-    setParentState(newState);                     // updates parentState
+  type BigPlayProps = { // type keyword is equal to an object -> PlayProps
+    name: string // key - name and data type - string
   }
-*/
+  // Big Play
+  const [bigPlay, setBigPlay] = useState<string | null>(null);
 
-  /* Create a new object called batmanName */
-  const batmanName = {
-    first: 'Bruce', // properties
-    last: 'Wayne',
+  const handleChange = (event:React.ChangeEvent<HTMLInputElement>) => {
+    setBigPlay(event.target.value);
   }
 
   const ffmpegRef = useRef(new FFmpeg());
@@ -74,7 +66,7 @@ function App() {
       "-i",
       "input.mp4",
       "-filter_complex",
-      "drawtext=fontfile=/block.ttf:text='Fuzzy Red Panda':x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=white:enable='between(t,1,6)'",
+      "drawtext=fontfile=/block.ttf:text="+bigPlay+":x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=white:enable='between(t,1,6)'",
       "output.mp4",
     ]);
     const fileData = await ffmpeg.readFile("output.mp4");
@@ -94,15 +86,13 @@ function App() {
       }}
     >
 
-      <LiveText name='Gilbert' />
-      <Person name={"Jax"} />{" "}
-
-      {/* name prop is equal to a string */}
-      {/* messageCount prop is equal to a number */}
-      {/* isLoggedIn prop is equal to a boolean */}
-      <ChildComponent name='Vishwas' messageCount={20} isLoggedIn={false} /> 
-
-      <Batman name={batmanName} />
+      <p>
+        {" "}
+        Bio: {!bigPlay ? "No Bio Available" : bigPlay}
+      </p>
+      <p>
+      <input onChange={handleChange} />
+      </p>
 
       {loaded ? (
         <>
