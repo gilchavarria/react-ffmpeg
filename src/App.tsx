@@ -6,6 +6,15 @@ function App() {
   const [loaded, setLoaded] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  // Create data variable
+  const data = "Some good old plain text date";
+
+  // Create a Blob that hold data
+  const blob = new Blob([data], { type: 'text/plain' });
+
+  // Create URL for data in blob
+  const url = URL.createObjectURL(blob);
+
   // Big Play
   const [bigPlay, setBigPlay] = useState<string | null>(null);
 
@@ -63,7 +72,7 @@ function App() {
       "-i",
       "input.mp4",
       "-filter_complex",
-      "drawtext=fontfile=/block.ttf:text="+bigPlay+":x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=white:enable='between(t,1,6)'",
+      "drawtext=fontfile=/block.ttf:text="+bigPlay+":x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=blue:enable='between(t,4,10)'",
       "output.mp4",
     ]);
     const fileData = await ffmpeg.readFile("output.mp4");
@@ -82,10 +91,9 @@ function App() {
         padding: "20px",
       }}
     >
-
       <p>
         {" "}
-        Bio: {!bigPlay ? "No Bio Available" : bigPlay}
+        Big Play Text: {!bigPlay ? "No Big Play Set" : bigPlay}
       </p>
       <p>
       <input onChange={handleChange} />
@@ -101,9 +109,19 @@ function App() {
             controls
           ></video>
           <br />
+
           <p ref={messageRef}></p>
           <button onClick={watermark}>Add Watermark</button>
+
+          <p>
+          <a 
+            href = {url}
+            download = 'url.txt'
+          >download link</a>
+          </p>
+
         </>
+
       ) : (
         <>
           {loading && <p>Loading ffmpeg-core...</p>}
