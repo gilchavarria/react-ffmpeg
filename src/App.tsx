@@ -72,7 +72,7 @@ function App() {
       "-i",
       "input.mp4",
       "-filter_complex",
-      "drawtext=fontfile=/block.ttf:text="+bigPlay+":x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=blue:enable='between(t,4,10)'",
+      "drawtext=fontfile=/block.ttf:text="+bigPlay+":x=(w-text_w)/2:y=(h-text_h)/2:fontsize=50:fontcolor=00266a:enable='between(t,4,10)'",
       "output.mp4",
     ]);
     const fileData = await ffmpeg.readFile("output.mp4");
